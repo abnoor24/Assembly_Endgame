@@ -14,14 +14,3 @@ export default function WordDisplay(props) {
 
   return <section className="word">{answerDisplay}</section>;
 }
-
-//playerInput
-//currentWord
-
-// if (props.gameCondition === "lost") {
-//     answerDisplay = props.currentWord.split("").map((char, index) => (
-//       <span key={index} style={{ color: "#EC5D49" }}>
-//         {char.toUpperCase()}
-//       </span>
-//     ));
-//   } else {
