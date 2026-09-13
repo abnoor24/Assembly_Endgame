@@ -1,21 +1,30 @@
-export default function Keyboard(props) {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+import { clsx } from "clsx";
 
-  const keyboardDisplay = alphabet.split("").map((char) => {
-    let color = "#fcba29";
-    if (props.playerInput.includes(char)) {
-      props.currentWord.includes(char)
-        ? (color = "#10A95B")
-        : (color = "#EC5D49");
-    }
+export default function Keyboard(props) {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  const keyboardDisplay = alphabet.split("").map((letter) => {
+    const isGuessed = props.playerInput.includes(letter);
+    const isCorrect = isGuessed && props.currentWord.includes(letter);
+    const isWrong = isGuessed && !props.currentWord.includes(letter);
+
+    //CLSX constructor for className
+    const className = clsx({
+      correct: isCorrect,
+      wrong: isWrong,
+    });
+
     return (
       <button
-        key={char}
+        key={letter}
         on="false"
-        style={{ backgroundColor: color }}
-        onClick={() => props.click(char)}
+        className={className}
+        onClick={() => props.click(letter)}
+        disabled={props.isGameOver}
+        aria-disabled={props.playerInput.includes(letter)}
+        aria-label={`label: ${letter}`}
       >
-        {char}
+        {letter.toUpperCase()}
       </button>
     );
   });

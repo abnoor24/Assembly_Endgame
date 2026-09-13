@@ -1,7 +1,8 @@
 //Contains the top Heading, with display text
 // Also contains the game state banner which state wheather you win or lose.
+import GameBanner from "./GameBanner";
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header className="heading">
       <h3 id="title">Assembly Endgame</h3>
@@ -9,10 +10,13 @@ export default function Header() {
         Guess the word in under 8 attempts to keep the programming world safe
         from Assembly!
       </p>
-      <div className="game-state-display">
-        <h3>You Win!</h3>
-        <h4> Well done!🎉</h4>
-      </div>
+
+      <GameBanner
+        gameCounter={props.gameCounter}
+        gameCondition={props.gameCondition}
+        isLastGuessIncorrect={props.isLastGuessIncorrect}
+        playerInput={props.playerInput}
+      />
     </header>
   );
 }
